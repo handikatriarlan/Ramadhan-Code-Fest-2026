@@ -23,9 +23,24 @@ class AlQuranApi {
   }
 
   Future<Map<String, dynamic>> fetchSurahIndonesian(int surahNumber) async {
-    final res = await http.get(Uri.parse('$_base/surah/$surahNumber/id.indonesian'));
+    final res =
+        await http.get(Uri.parse('$_base/surah/$surahNumber/id.indonesian'));
     if (res.statusCode != 200) {
-      throw Exception('Failed to load surah translation (HTTP ${res.statusCode})');
+      throw Exception(
+          'Failed to load surah translation (HTTP ${res.statusCode})');
+    }
+    final json = jsonDecode(res.body) as Map<String, dynamic>;
+    return (json['data'] as Map<String, dynamic>);
+  }
+
+  /// Audio murattal edition (contoh: ar.alafasy)
+  Future<Map<String, dynamic>> fetchSurahAudioEdition(
+    int surahNumber, {
+    String edition = 'ar.alafasy',
+  }) async {
+    final res = await http.get(Uri.parse('$_base/surah/$surahNumber/$edition'));
+    if (res.statusCode != 200) {
+      throw Exception('Failed to load audio edition (HTTP ${res.statusCode})');
     }
     final json = jsonDecode(res.body) as Map<String, dynamic>;
     return (json['data'] as Map<String, dynamic>);
