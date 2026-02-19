@@ -1,3 +1,6 @@
 [submodule "InternetGrounding"]
 	path = InternetGrounding
 	url = https://github.com/suryami62/InternetGrounding.git
+[submodule "personal-development-tracker"]
+	path = personal-development-tracker
+	url = https://github.com/cds-id/pdt.git
